@@ -3,7 +3,7 @@ name: "os matrix CI workflow"
 
 on:
   push:
-    branches: [ main ]
+    branches: [ dev ]
   schedule:
       - cron:  '0 0 1 * *' ##execution of a task in the first minute of the month  
 
