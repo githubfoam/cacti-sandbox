@@ -1,0 +1,60 @@
+name: "Ubuntu librensm CI workflow"
+
+
+on:
+  push:
+    branches: [ dev ]
+jobs:
+ 
+
+ 
+      
+#https://docs.librenms.org/Installation/Install-LibreNMS/
+  ubuntu-2004-librenms-nginx-job:
+    name: "ubuntu-20.04 librenms job nginx"
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinting"
+      run: hostnamectl status 
+    - name: "Install Required Packages"
+      run: sudo apt-get install -qqy software-properties-common
+    - name: "Install Required Packages 2"
+      run: |
+        sudo apt-get install -qqy software-properties-common
+        sudo add-apt-repository universe
+        sudo apt-get update -qq
+        sudo apt-get install -yqq acl curl composer fping git graphviz imagemagick mariadb-client mariadb-server mtr-tiny nginx-full nmap php7.4-cli php7.4-curl php7.4-fpm php7.4-gd php7.4-json php7.4-mbstring php7.4-mysql php7.4-snmp php7.4-xml php7.4-zip rrdtool snmp snmpd whois unzip python3-pymysql python3-dotenv python3-redis python3-setuptools python3-systemd
+    - name: "Add librenms user"
+      run: sudo useradd librenms -d /opt/librenms -M -r -s "$(which bash)"
+    - name: "Download LibreNMS"
+      run: cd /opt && git clone https://github.com/librenms/librenms.git
+    - name: "Set permissions"
+      run: |
+        sudo chown -R librenms:librenms /opt/librenms
+        sudo chmod 771 /opt/librenms
+        sudo setfacl -d -m g::rwx /opt/librenms/rrd /opt/librenms/logs /opt/librenms/bootstrap/cache/ /opt/librenms/storage/
+        sudo setfacl -R -m g::rwx /opt/librenms/rrd /opt/librenms/logs /opt/librenms/bootstrap/cache/ /opt/librenms/storage/
+    - name: "Install PHP dependencies"
+      run: |
+        su - librenms
+        ./scripts/composer_wrapper.php install --no-dev
+        exit
+        
+
+#https://docs.librenms.org/Installation/Install-LibreNMS/
+  ubuntu-2004-librenms-apache-job:
+    name: "ubuntu-20.04 librenms job apache"
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinting"
+      run: hostnamectl status 
+    - name: "Install Required Packages"
+      run: sudo apt-get install -qqy software-properties-common
+    - name: "Install Required Packages 2"
+      run: |
+        sudo apt-get install -qqy software-properties-common
+        sudo add-apt-repository universe
+        sudo apt-get update -qq
+        sudo apt-get install -yqq acl curl apache2 composer fping git graphviz imagemagick libapache2-mod-fcgid mariadb-client mariadb-server mtr-tiny nmap php7.4-cli php7.4-curl php7.4-fpm php7.4-gd php7.4-json php7.4-mbstring php7.4-mysql php7.4-snmp php7.4-xml php7.4-zip rrdtool snmp snmpd whois python3-pymysql python3-dotenv python3-redis python3-setuptools python3-systemd
