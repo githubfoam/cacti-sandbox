@@ -1,0 +1,36 @@
+name: "Ubuntu cacti CI workflow"
+
+
+on:
+  push:
+    branches: [ dev ]
+jobs:
+ 
+
+ 
+      
+#https://docs.librenms.org/Installation/Install-LibreNMS/
+  ubuntu-2004-cacti-job:
+    name: "ubuntu-20.04 cacti job"
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinting"
+      run: hostnamectl status 
+    - name: "Install Apache & MariaDB"
+      run: sudo apt-get update -qq && sudo apt-get -yqq install apache2 mariadb-server mariadb-client php-mysql libapache2-mod-php
+    - name: "Install PHP Extensions"
+      run: sudo apt-get -yqq install php-xml php-ldap php-mbstring php-gd php-gmp      
+    - name: "Install SNMP"
+      run: sudo apt-get -yqq install snmp php-snmp rrdtool librrds-perl       
+    - name: "Install cacti"
+      run: |
+        wget --no-check-certificate https://www.cacti.net/downloads/cacti-latest.tar.gz
+        tar -zxvf cacti-latest.tar.gz
+        sudo mv cacti-1* /opt/cacti
+    - name: "Configure the firewall to allow Cacti to fetch the data from client machines"
+      run: |
+        sudo ufw enable
+        sudo ufw allow 161/udp
+        sudo ufw reload
+        sudo ufw status
