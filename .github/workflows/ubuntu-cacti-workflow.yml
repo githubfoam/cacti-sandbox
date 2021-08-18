@@ -19,7 +19,7 @@ jobs:
       run: hostnamectl status  
     - name: "Install Apache & MariaDB"
       run: |
-        sudo apt-get update -qq
+        sudo apt-get update
         sudo apt-get install -yqq  apache2 mariadb-server mariadb-client php-mysql libapache2-mod-php
     - name: "Install PHP Extensions"
       run: sudo apt-get  install -yqq php-xml php-ldap php-mbstring php-gd php-gmp      
