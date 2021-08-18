@@ -18,7 +18,9 @@ jobs:
     - name: "os fingerprinting"
       run: hostnamectl status  
     - name: "update"
-      run:  sudo apt-get update
+      run:  |
+        sudo apt-get update
+        sudo apt-get install -y  apache2 mariadb-server mariadb-client php-mysql
     - name: "Install Apache & MariaDB"
       run:  | 
         sudo apt-get install -y  apache2 mariadb-server mariadb-client php-mysql \
