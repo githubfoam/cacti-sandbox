@@ -44,12 +44,14 @@ jobs:
     - uses: actions/checkout@v2
     - name: "os fingerprinting"
       run: hostnamectl status  
+    - name: "update"
+      run:  sudo apt-get update
     - name: "Install Apache & MariaDB"
-      run: sudo apt-get update -qq && sudo apt-get -yqq install apache2 mariadb-server mariadb-client php-mysql libapache2-mod-php
+      run:  sudo apt-get install -yqq  apache2 mariadb-server mariadb-client php-mysql libapache2-mod-php
     - name: "Install PHP Extensions"
-      run: sudo apt-get -yqq install php-xml php-ldap php-mbstring php-gd php-gmp      
+      run: sudo apt-get  install -yqq php-xml php-ldap php-mbstring php-gd php-gmp      
     - name: "Install SNMP"
-      run: sudo apt-get -yqq install snmp php-snmp rrdtool librrds-perl       
+      run: sudo apt-get install -yqq snmp php-snmp rrdtool librrds-perl       
     - name: "Install cacti"
       run: |
         wget --no-check-certificate https://www.cacti.net/downloads/cacti-latest.tar.gz
@@ -70,12 +72,14 @@ jobs:
     - uses: actions/checkout@v2
     - name: "os fingerprinting"
       run: hostnamectl status 
+    - name: "update"
+      run:  sudo apt-get update
     - name: "Install Apache & MariaDB"
-      run: sudo apt-get update -qq && sudo apt-get -yqq install apache2 mariadb-server mariadb-client php-mysql libapache2-mod-php
+      run:  sudo apt-get install -yqq  apache2 mariadb-server mariadb-client php-mysql libapache2-mod-php
     - name: "Install PHP Extensions"
-      run: sudo apt-get -yqq install php-xml php-ldap php-mbstring php-gd php-gmp      
+      run: sudo apt-get  install -yqq php-xml php-ldap php-mbstring php-gd php-gmp      
     - name: "Install SNMP"
-      run: sudo apt-get -yqq install snmp php-snmp rrdtool librrds-perl       
+      run: sudo apt-get install -yqq snmp php-snmp rrdtool librrds-perl       
     - name: "Install cacti"
       run: |
         wget --no-check-certificate https://www.cacti.net/downloads/cacti-latest.tar.gz
@@ -95,12 +99,14 @@ jobs:
     - uses: actions/checkout@v2
     - name: "os fingerprinting"
       run: hostnamectl status   
+    - name: "update"
+      run:  sudo apt-get update
     - name: "Install Apache & MariaDB"
-      run: sudo apt-get update -qq && sudo apt-get -yqq install apache2 mariadb-server mariadb-client php-mysql libapache2-mod-php
+      run:  sudo apt-get install -yqq  apache2 mariadb-server mariadb-client php-mysql libapache2-mod-php
     - name: "Install PHP Extensions"
-      run: sudo apt-get -yqq install php-xml php-ldap php-mbstring php-gd php-gmp      
+      run: sudo apt-get  install -yqq php-xml php-ldap php-mbstring php-gd php-gmp      
     - name: "Install SNMP"
-      run: sudo apt-get -yqq install snmp php-snmp rrdtool librrds-perl       
+      run: sudo apt-get install -yqq snmp php-snmp rrdtool librrds-perl       
     - name: "Install cacti"
       run: |
         wget --no-check-certificate https://www.cacti.net/downloads/cacti-latest.tar.gz
