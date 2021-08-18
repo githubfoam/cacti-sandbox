@@ -20,7 +20,7 @@ jobs:
     - name: "update"
       run:  sudo apt-get update
     - name: "Install Apache & MariaDB"
-      run:  sudo apt-get install -y  apache2 mariadb-server mariadb-client php-mysql libapache2-mod-php
+      run:  sudo apt-get install -y  apache2 mariadb-server mariadb-client php-mysql libapache2-mod-php libapache2-mod-php7.0
     - name: "Install PHP Extensions"
       run: sudo apt-get  install -y php-xml php-ldap php-mbstring php-gd php-gmp      
     - name: "Install SNMP"
